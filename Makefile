@@ -19,7 +19,7 @@ mykernel.iso: mykernel.bin
 	mkdir iso
 	mkdir iso/boot
 	mkdir iso/boot/grub
-	cp mykernel.bin iso/boot/mykernel.bin
+	cp $< iso/boot/
 	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
 	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
 	echo ''                                  >> iso/boot/grub/grub.cfg
@@ -27,5 +27,5 @@ mykernel.iso: mykernel.bin
 	echo '  multiboot /boot/mykernel.bin'    >> iso/boot/grub/grub.cfg
 	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg	
-	grub-mkrescue --output=mykernel.iso iso
+	grub-mkrescue --output=$@ iso
 	rm -rf iso
